@@ -1,0 +1,17 @@
+{
+ "name": "OUAN – กินกับอ้วน",
+ "short_name": "OUAN",
+ "start_url": "/",
+ "display": "standalone",
+ "background_color": "#fffdf6",
+ "theme_color": "#5271ff",
+ "lang": "th",
+ "icons": [
+  {
+   "src": "/icon-512.png",
+   "sizes": "512x512",
+   "type": "image/png",
+   "purpose": "any maskable"
+  }
+ ]
+}

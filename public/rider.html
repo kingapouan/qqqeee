@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta name="robots" content="noindex,nofollow">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="light only">
+<title>OUAN ไรเดอร์</title>
+<link href="https://fonts.googleapis.com/css2?family=Mali:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--blue:#5271ff;--sun:#ffd562;--bg:#fffdf6;--card:#fff;--line:#f0e9d2;--soft:#eef1ff;--text:#2b2f45;--ink:#666;--ok:#2ecc71;--bad:#c0392b;color-scheme:light;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font-family:'Mali','Noto Sans Thai',system-ui,sans-serif}
+.wrap{max-width:560px;margin:0 auto;padding:14px}
+h1{font-size:20px;color:var(--blue);margin:4px 0 10px}
+button{font:inherit;cursor:pointer}input{font:inherit;padding:10px;border-radius:12px;border:2px solid var(--line);width:100%}
+.card{background:var(--card);border:2.5px solid var(--blue);border-radius:22px 22px 22px 8px;box-shadow:3px 4px 0 var(--sun);padding:14px;margin-bottom:14px}
+.row{display:flex;justify-content:space-between;gap:8px;align-items:center;flex-wrap:wrap}
+.share{width:100%;border:0;border-radius:18px;padding:18px;font-size:20px;font-weight:700;color:#fff;background:var(--blue);box-shadow:0 5px 0 #3550d6}
+.share.on{background:var(--ok);box-shadow:0 5px 0 #1e9c52}.share:active{transform:translateY(3px);box-shadow:none}
+.gps{margin-top:10px;font-size:14px;line-height:1.6;color:var(--ink)}.gps b{color:var(--text)}
+.dot{display:inline-block;width:10px;height:10px;border-radius:50%;background:#bbb;margin-right:6px}.dot.on{background:var(--ok);animation:p 1.4s infinite}.dot.err{background:var(--bad)}
+@keyframes p{50%{opacity:.35}}
+.pick{display:flex;align-items:center;gap:8px;font-size:14px;background:var(--soft);border-radius:12px;padding:8px 10px;margin:8px 0}.pick input{width:20px;height:20px}
+.info{line-height:1.8;font-size:15px}.info a{color:var(--blue);font-weight:600}
+.items{margin:8px 0;padding:8px 10px;background:var(--soft);border-radius:14px;font-size:14px;line-height:1.7}
+.nav{display:block;text-align:center;text-decoration:none;border:2px solid var(--blue);color:var(--blue);border-radius:14px;padding:11px;font-weight:700;margin-top:8px}
+.done{width:100%;margin-top:8px;border:0;border-radius:14px;background:var(--ok);color:#fff;font-size:17px;font-weight:700;padding:13px}
+.save{background:var(--blue);color:#fff;border:0;border-radius:12px;padding:12px;width:100%;margin-top:10px}
+.btns{display:flex;gap:8px;margin-top:8px}.btns .nav{flex:1;margin-top:0}button.nav{background:#fff;font:inherit;font-weight:700}.nav.call{background:var(--ok);border-color:var(--ok);color:#fff}
+#map{height:260px;border-radius:16px;overflow:hidden;border:2px solid var(--blue);position:relative;z-index:0;margin-top:8px}.mk{font-size:26px;text-align:center;line-height:34px;filter:drop-shadow(0 2px 2px rgba(0,0,0,.35))}
+.muted{color:var(--ink)}.empty{text-align:center;padding:30px;color:var(--ink)}
+#login{max-width:340px;margin:16vh auto;text-align:center}
+#toast{position:fixed;left:50%;bottom:20px;transform:translateX(-50%);background:var(--text);color:#fff;padding:10px 18px;border-radius:99px;display:none;z-index:9;max-width:90vw;text-align:center}
+
+button.nav.go{width:100%;background:var(--blue);color:#fff;border-color:var(--blue);font-size:16px;padding:13px}
+#nav{position:fixed;inset:0;z-index:40;background:#dfe6ff}
+#navmap{position:absolute;inset:0;z-index:0}
+#navtop{position:absolute;left:10px;right:10px;top:calc(10px + env(safe-area-inset-top,0px));z-index:500;background:var(--blue);color:#fff;border-radius:18px;padding:12px 14px;display:flex;gap:12px;align-items:center;box-shadow:0 4px 14px rgba(0,0,0,.35)}
+#navtop .ar{font-size:36px;line-height:1;min-width:44px;text-align:center}
+#navtop b{font-size:19px;line-height:1.3;display:block}
+#nvD{font-size:13px;opacity:.92}
+#nvX{flex:none;background:rgba(255,255,255,.22);color:#fff;border:0;border-radius:12px;width:42px;height:42px;font-size:20px}
+#navbtm{position:absolute;left:0;right:0;bottom:0;z-index:500;background:#fff;border-radius:22px 22px 0 0;padding:12px 14px calc(12px + env(safe-area-inset-bottom,0px));box-shadow:0 -4px 16px rgba(0,0,0,.28)}
+.nchips{display:flex;gap:6px;overflow-x:auto;margin:6px 0}.nchips:empty{display:none}
+.nchips button{flex:none;border:2px solid var(--line);background:#fff;border-radius:99px;padding:6px 12px;font-size:13px}.nchips button.on{background:var(--blue);border-color:var(--blue);color:#fff;font-weight:700}
+.nrow{display:flex;gap:8px;margin-top:8px}
+.nrow>*{flex:1;text-align:center;text-decoration:none;border:2px solid var(--blue);color:var(--blue);background:#fff;border-radius:14px;padding:11px 6px;font-weight:700;font-size:14px}
+.nrow .on{background:var(--blue);color:#fff}
+.nrow .call{background:var(--ok);border-color:var(--ok);color:#fff}
+.nrow .ok{background:var(--ok);border-color:var(--ok);color:#fff}
+</style>
+</head>
+<body>
+<div class="wrap">
+ <div id="login"><h1>🛵 OUAN ไรเดอร์</h1><input id="key" type="password" placeholder="รหัสไรเดอร์" autocomplete="current-password"><button class="save" id="go">เข้าสู่ระบบ</button><p class="muted" id="msg"></p></div>
+ <div id="app" hidden>
+  <div class="row"><h1>🛵 OUAN ไรเดอร์</h1><small id="rt" style="color:var(--ok);font-weight:700"></small><button style="background:none;border:0;color:var(--bad)" onclick="logout()">ออก</button></div>
+  <div class="card">
+   <button class="share" id="share" onclick="toggleShare()">▶ เริ่มแชร์ตำแหน่ง</button>
+   <div class="gps" id="gps"><span class="dot"></span>ยังไม่ได้แชร์ตำแหน่ง</div>
+  </div>
+  <div class="card" id="mapcard" hidden><div class="row"><b>🗺️ แผนที่ (ไม่ต้องออกจากหน้านี้)</b><button style="background:none;border:0;color:var(--blue);font-weight:700" onclick="fitAll()">ดูทั้งหมด</button></div><div id="map"></div></div>
+  <div id="list"></div>
+  <p class="muted" style="font-size:13px;line-height:1.7">💡 ระหว่างแชร์ ให้เปิดหน้านี้ค้างไว้และไม่ล็อกจอ ใช้แผนที่ในหน้านี้ดูหมุดลูกค้าได้เลย ถ้าสลับไป Google Maps หรือล็อกจอ ตำแหน่งจะหยุดส่ง และจะส่งต่อทันทีเมื่อกลับมาหน้านี้</p>
+ </div>
+</div>
+<div id="nav" hidden>
+ <div id="navmap"></div>
+ <div id="navtop"><div class="ar" id="nvA">🧭</div><div style="flex:1;min-width:0"><div id="nvD"></div><b id="nvT">กำลังหาตำแหน่งของคุณ...</b></div><button id="nvX" onclick="closeNav()" aria-label="ปิดแผนที่">✕</button></div>
+ <div id="navbtm">
+  <div class="row"><b id="nvO"></b><span id="nvE" style="font-weight:700;color:var(--blue)"></span></div>
+  <div class="nchips" id="nvC"></div>
+  <div class="nrow"><button id="nvF" onclick="navFollow()">📍 ตามฉัน</button><button onclick="navFit()">🔭 ดูทั้งเส้นทาง</button><button id="nvS" onclick="toggleShare();navUi()"></button></div>
+  <div class="nrow"><a id="nvTel" class="call">📞 โทร</a><a id="nvG" target="_blank" rel="noopener">🧭 Google Maps</a><button class="ok" onclick="navDone()">✅ ส่งถึงแล้ว</button></div>
+ </div>
+</div>
+<div id="toast"></div>
+<script>
+const ENDPOINT='https://script.google.com/macros/s/AKfycbyo0n2Ouuxr7sYgd0JRvicz23kgxOUJj4mtdD6RDTiWKG82FPZPBAnaCZ7iQaSxcGgD/exec';
+const $=s=>document.querySelector(s),fmt=n=>'฿'+Number(n).toLocaleString('th-TH');
+const esc=t=>String(t??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+let KEY=localStorage.getItem('ouan-rkey')||'',orders=[],off={},sharing=false,watchId=null,pos=null,lastSent=0,wake=null,timer=null,err='';
+function toast(t){const e=$('#toast');e.textContent=t;e.style.display='block';clearTimeout(window._t);window._t=setTimeout(()=>e.style.display='none',2400)}
+async function api(action,data={}){const r=await fetch(ENDPOINT,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify({action,key:KEY,...data})});const j=await r.json();if(!j.ok)throw new Error(j.error||'ผิดพลาด');return j}
+const FB_URL='https://ouan-e1955-default-rtdb.asia-southeast1.firebasedatabase.app/'; // ใส่ URL Firebase Realtime Database เช่น https://ouan-xxxx-default-rtdb.asia-southeast1.firebasedatabase.app (เว้นว่าง = ใช้แบบดึงข้อมูลเป็นรอบเหมือนเดิม)
+function fbSub(path,cb,st){ // ฟังข้อมูลแบบเรียลไทม์ผ่าน EventSource (ไม่ต้องใช้ SDK) ต่อใหม่เองเมื่อหลุด
+ if(!FB_URL||!window.EventSource)return null;
+ let es=null,dead=false,data=null,wait=1000,tm=null;
+ const apply=(p,d,merge)=>{const ks=String(p||'/').split('/').filter(Boolean),mg=(a,b)=>merge&&a&&typeof a=='object'&&b&&typeof b=='object'?Object.assign({},a,b):b;
+  if(!ks.length){data=mg(data,d);return}
+  if(!data||typeof data!='object')data={};
+  if(d===null)delete data[ks[0]];else data[ks[0]]=mg(data[ks[0]],d)};
+ const open=()=>{if(dead)return;
+  es=new EventSource(FB_URL.replace(/\/$/,'')+'/'+path+'.json');
+  es.onopen=()=>{wait=1000};
+  ['put','patch'].forEach(ev=>es.addEventListener(ev,e=>{try{const m=JSON.parse(e.data);apply(m.path,m.data,ev=='patch');st&&st(true);cb(data)}catch(x){}}));
+  es.onerror=()=>{st&&st(false);try{es.close()}catch(x){}es=null;if(!dead){tm=setTimeout(open,wait);wait=Math.min(wait*2,30000)}}};
+ open();
+ return{close(){dead=true;clearTimeout(tm);if(es)try{es.close()}catch(x){}es=null;st&&st(false)}}}
+var fbLive=false,lastLoad=0,fbS=null,fbT=null;
+function fbStart(){if(fbS||!FB_URL)return;
+ fbS=fbSub('sig/orders',()=>{clearTimeout(fbT);fbT=setTimeout(()=>load().catch(()=>{}),250)},v=>{fbLive=v;fbBadge()})}
+function fbBadge(){const e=$('#rt');if(e)e.textContent=fbLive?'⚡เรียลไทม์':''}
+async function login(){KEY=$('#key').value||KEY;$('#msg').textContent='กำลังเข้าสู่ระบบ...';
+ try{await load();localStorage.setItem('ouan-rkey',KEY);$('#login').hidden=true;$('#app').hidden=false;fbStart();setInterval(()=>{if(!document.hidden&&!(fbLive&&Date.now()-lastLoad<60000))load().catch(()=>{})},20000)}
+ catch(e){$('#login').hidden=false;$('#app').hidden=true;$('#msg').textContent=e.message;if(/รหัส/.test(e.message))localStorage.removeItem('ouan-rkey')}}
+function logout(){stopShare();localStorage.removeItem('ouan-rkey');location.reload()}
+let LF=null,map=null,mk={},riderMk=null;
+function loadLeaflet(){return LF||(LF=new Promise((ok,no)=>{const l=document.createElement('link');l.rel='stylesheet';l.href='https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css';document.head.appendChild(l);const c=document.createElement('script');c.src='https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js';c.onload=ok;c.onerror=()=>{LF=null;no()};document.head.appendChild(c)}))}
+const coords=o=>{const m=/q=(-?\d+\.?\d*),(-?\d+\.?\d*)/.exec(o.map||'');return m?[+m[1],+m[2]]:null};
+const icon=e=>L.divIcon({html:'<div class="mk">'+e+'</div>',className:'',iconSize:[34,34],iconAnchor:[17,17]});
+async function updateMap(refit){const pts=orders.map(o=>({o,c:coords(o)})).filter(x=>x.c);$('#mapcard').hidden=!pts.length;if(!pts.length)return;
+ try{await loadLeaflet()}catch(e){return}
+ if(!map){map=L.map('map').setView(pts[0].c,14);L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:19,attribution:'© OpenStreetMap'}).addTo(map);refit=true}
+ map.invalidateSize();const keep=new Set(pts.map(x=>String(x.o.no)));
+ Object.keys(mk).forEach(k=>{if(!keep.has(k)){map.removeLayer(mk[k]);delete mk[k]}});
+ pts.forEach(({o,c})=>{if(!mk[o.no])mk[o.no]=L.marker(c,{icon:icon('🏠')}).addTo(map).bindTooltip('#'+esc(o.no)+' '+esc(o.name),{permanent:true,direction:'top',offset:[0,-16]})});
+ if(pos){if(!riderMk)riderMk=L.marker([pos.lat,pos.lng],{icon:icon('🛵'),zIndexOffset:1000}).addTo(map);else riderMk.setLatLng([pos.lat,pos.lng])}
+ if(refit)fitAll()}
+function fitAll(){if(!map)return;const p=Object.values(mk).map(m=>m.getLatLng());if(riderMk)p.push(riderMk.getLatLng());if(p.length)map.fitBounds(p,{padding:[40,40],maxZoom:17})}
+function focusOrder(no){const m=mk[no];if(!m||!map)return;$('#mapcard').scrollIntoView({behavior:'smooth',block:'center'});map.setView(m.getLatLng(),17)}
+const pend=new Set();
+async function load(){const j=await api('riderOrders');lastLoad=Date.now();orders=(j.orders||[]).filter(o=>!pend.has(String(o.no)));render()}
+const sel=()=>orders.filter(o=>!off[o.no]).map(o=>o.no);
+function render(){
+ $('#list').innerHTML=orders.length?orders.map(o=>`<div class="card"><div class="row"><b style="font-size:18px">#${esc(o.no)}</b><b>${fmt(o.sum)}</b></div>
+ <label class="pick"><input type="checkbox" ${off[o.no]?'':'checked'} onchange="off['${esc(o.no)}']=!this.checked;ping(true)"> แชร์ตำแหน่งให้ลูกค้าคนนี้เห็น</label>
+ <div class="info">👤 ${esc(o.name)} · ${esc(o.tel)}<br>📍 ${esc(o.addr)||'-'}${o.note?'<br>📝 '+esc(o.note):''}${o.rnote?'<br>💬 <b>ฝากบอกไรเดอร์:</b> '+esc(o.rnote):''}<br><span class="muted">${esc(o.pay)}</span></div>
+ <div class="items">${esc(o.items).split(', ').join('<br>')}</div>
+ <div class="btns"><a class="nav call" href="tel:${esc(o.tel)}">📞 โทรหาลูกค้า</a>${coords(o)?`<button class="nav" onclick="focusOrder('${esc(o.no)}')">📍 ดูหมุด</button>`:''}</div>
+ ${coords(o)?`<button class="nav go" onclick="openNav('${esc(o.no)}')">🧭 นำทางในแอป · แผนที่เต็มจอ</button>`:''}${o.map?`<a class="nav" href="${esc(o.map)}" target="_blank" rel="noopener">🧭 เปิด Google Maps (ตำแหน่งจะหยุดส่งชั่วคราว)</a>`:''}
+ <button class="done" onclick="finish('${esc(o.no)}')">✅ ส่งถึงแล้ว</button></div>`).join(''):'<div class="empty">🎉 ยังไม่มีออเดอร์ที่ต้องไปส่ง<br><small>เมื่อร้านกด "กำลังจัดส่ง" ออเดอร์จะโผล่ที่นี่</small></div>';updateMap()}
+async function finish(no){const o=orders.find(x=>x.no==no);if(!o)return;
+ pend.add(String(no));orders=orders.filter(x=>x.no!=no);render();toast('⏳ กำลังบันทึก #'+no+' ...');
+ try{await api('riderDone',{no});pend.delete(String(no));toast('✅ ส่งถึงแล้ว #'+no);if(!orders.length)stopShare()}
+ catch(e){pend.delete(String(no));orders.unshift(o);render();toast('❌ บันทึกไม่สำเร็จ คืนออเดอร์ #'+no+' กลับแล้ว: '+e.message)}}
+function gps(){const el=$('#gps');
+ if(err)return el.innerHTML='<span class="dot err"></span><b style="color:var(--bad)">'+esc(err)+'</b>';
+ if(!sharing)return el.innerHTML='<span class="dot"></span>ยังไม่ได้แชร์ตำแหน่ง';
+ const n=sel().length,ago=lastSent?Math.round((Date.now()-lastSent)/1000):null;
+ el.innerHTML='<span class="dot on"></span><b>กำลังแชร์ตำแหน่ง</b> ให้ลูกค้า '+n+' ออเดอร์'+(ago!=null?'<br>ส่งล่าสุด '+ago+' วิที่แล้ว':'<br>กำลังหาตำแหน่ง...')}
+async function ping(force){if(!sharing||!pos)return;const nos=sel();if(!nos.length)return;if(!force&&Date.now()-lastSent<4000)return;
+ lastSent=Date.now();try{await api('riderPing',{nos,lat:pos.lat,lng:pos.lng});err=''}catch(e){err='ส่งตำแหน่งไม่สำเร็จ: '+e.message}gps()}
+async function lockScreen(){try{if(navigator.wakeLock)wake=await navigator.wakeLock.request('screen')}catch(e){}}
+function toggleShare(){sharing?stopShare():startShare()}
+function startShare(){if(!navigator.geolocation){err='เครื่องนี้ไม่รองรับการระบุตำแหน่ง';gps();return}
+ sharing=true;err='';$('#share').classList.add('on');$('#share').textContent='⏹ หยุดแชร์ตำแหน่ง';lockScreen();gps();
+ watch();
+ timer=setInterval(()=>{ping(false);gps()},5000)}
+function watch(){if(watchId!=null)navigator.geolocation.clearWatch(watchId);
+ watchId=navigator.geolocation.watchPosition(p=>{pos={lat:p.coords.latitude,lng:p.coords.longitude};err='';ping(false);updateMap(!riderMk);navOnPos()},e=>{err=e.code==1?'ไม่ได้รับอนุญาตตำแหน่ง — เปิดอนุญาตตำแหน่งของเว็บนี้ในการตั้งค่า':'หาตำแหน่งไม่ได้ ลองออกไปที่โล่ง';gps();navGpsErr()},{enableHighAccuracy:true,maximumAge:5000,timeout:20000})}
+function stopShare(){if(riderMk&&map){map.removeLayer(riderMk);riderMk=null}sharing=false;if(watchId!=null)navigator.geolocation.clearWatch(watchId);watchId=null;clearInterval(timer);try{wake&&wake.release()}catch(e){}wake=null;lastSent=0;$('#share').classList.remove('on');$('#share').textContent='▶ เริ่มแชร์ตำแหน่ง';gps();if(NV.open)ensureGps()}
+document.addEventListener('visibilitychange',()=>{if(!document.hidden){if(sharing){lockScreen();watch();ping(true)}load().catch(()=>{})}});
+/* ===== แผนที่เต็มจอ + เส้นทางนำทาง (ใช้ OSRM ฟรี + OpenStreetMap) ===== */
+var NV={open:false,no:null,map:null,rm:null,dm:null,line:null,cas:null,follow:true,steps:[],dur:0,dist:0,last:0,lastPos:null,busy:false,fail:false};
+const hav=(a,b,c,d)=>{const r=x=>x*Math.PI/180,h=Math.sin(r(c-a)/2)**2+Math.cos(r(a))*Math.cos(r(c))*Math.sin(r(d-b)/2)**2;return 12742*Math.asin(Math.sqrt(h))};
+const fd=km=>km<1?Math.max(10,Math.round(km*100)*10)+' ม.':km.toFixed(1)+' กม.';
+function ensureGps(){if(watchId==null&&navigator.geolocation)watch()}
+const navOrder=()=>orders.find(o=>String(o.no)==String(NV.no));
+const navDest=()=>{const o=navOrder();return o?coords(o):null};
+function navText(s){const m=s.m||{},t=m.type,mo=m.modifier||'',nm=s.name?' เข้า '+s.name:'';
+ const D={left:'ซ้าย',right:'ขวา','slight left':'เฉียงซ้าย','slight right':'เฉียงขวา','sharp left':'หักศอกซ้าย','sharp right':'หักศอกขวา'},A={left:'⬅️',right:'➡️','slight left':'↖️','slight right':'↗️','sharp left':'↙️','sharp right':'↘️',uturn:'↩️',straight:'⬆️'},a=A[mo]||'⬆️';
+ if(t=='arrive')return{a:'🏠',x:'ถึงที่หมายแล้ว'};
+ if(t=='roundabout'||t=='rotary'||t=='roundabout turn'||t=='exit roundabout'||t=='exit rotary')return{a:'🔄',x:'เข้าวงเวียน'+(m.exit?' ออกทางออกที่ '+m.exit:'')+nm};
+ if(mo=='uturn')return{a:'↩️',x:'กลับรถ'+nm};
+ if(t=='fork')return{a:a,x:'ที่แยก ชิด'+(/left/.test(mo)?'ซ้าย':'ขวา')+nm};
+ if(t=='merge')return{a:a,x:'ชิดเข้าสู่ '+(s.name||'ถนนหลัก')};
+ if(t=='on ramp')return{a:a,x:'ขึ้นทางลาด'+nm};
+ if(t=='off ramp')return{a:a,x:'ลงทางลาด'+nm};
+ if(D[mo])return{a:a,x:'เลี้ยว'+D[mo]+nm};
+ return{a:'⬆️',x:'ตรงไป'+nm}}
+async function openNav(no){NV.no=no;NV.open=true;NV.follow=true;NV.last=0;NV.steps=[];NV.dur=0;NV.dist=0;
+ $('#nav').hidden=false;document.body.style.overflow='hidden';lockScreen();ensureGps();
+ try{await loadLeaflet()}catch(e){toast('โหลดแผนที่ไม่สำเร็จ ลองใหม่อีกครั้ง');closeNav();return}
+ if(!NV.open)return;const d=navDest();if(!d){closeNav();return}
+ if(!NV.map){NV.map=L.map('navmap',{zoomControl:false}).setView(pos?[pos.lat,pos.lng]:d,pos?16:15);
+  L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:19,attribution:'© OpenStreetMap'}).addTo(NV.map);
+  NV.map.on('dragstart',()=>{NV.follow=false;navUi()})}
+ NV.map.invalidateSize();navMarkers();navUi();
+ if(pos)navOnPos(true);else{NV.map.setView(d,15);$('#nvT').textContent='กำลังหาตำแหน่งของคุณ...';$('#nvD').textContent=''}}
+function navMarkers(){if(!NV.map)return;const d=navDest();if(NV.dm){NV.map.removeLayer(NV.dm);NV.dm=null}if(d)NV.dm=L.marker(d,{icon:icon('🏠')}).addTo(NV.map)}
+function navLine(ll,dashed){if(!NV.map)return;[NV.cas,NV.line].forEach(l=>{if(l)NV.map.removeLayer(l)});
+ NV.cas=L.polyline(ll,{color:'#fff',weight:11,opacity:.9}).addTo(NV.map);NV.line=L.polyline(ll,{color:'#5271ff',weight:6,dashArray:dashed?'2 10':null}).addTo(NV.map)}
+async function navRoute(){const d=navDest();if(!d||!pos||NV.busy)return;NV.busy=true;NV.last=Date.now();NV.lastPos=[pos.lat,pos.lng];const no=NV.no;
+ try{const r=await fetch('https://router.project-osrm.org/route/v1/driving/'+pos.lng+','+pos.lat+';'+d[1]+','+d[0]+'?overview=full&geometries=geojson&steps=true',{signal:AbortSignal.timeout?AbortSignal.timeout(9000):undefined});
+  const j=await r.json();if(!j.routes||!j.routes[0])throw 0;if(!NV.open||NV.no!=no)return;
+  const rt=j.routes[0];navLine(rt.geometry.coordinates.map(x=>[x[1],x[0]]),false);
+  NV.fail=false;NV.dur=rt.duration;NV.dist=rt.distance/1000;NV.steps=(rt.legs[0].steps||[]).map(s=>({m:s.maneuver,name:s.name,dist:s.distance}))}
+ catch(e){if(!NV.open||NV.no!=no)return;NV.fail=true;NV.steps=[];NV.dist=hav(pos.lat,pos.lng,d[0],d[1]);NV.dur=NV.dist/25*3600;navLine([[pos.lat,pos.lng],d],true)}
+ finally{NV.busy=false}navNext()}
+function navOnPos(force){if(!NV.open||!NV.map||!pos)return;const p=[pos.lat,pos.lng];
+ if(!NV.rm)NV.rm=L.marker(p,{icon:icon('🛵'),zIndexOffset:1000}).addTo(NV.map);else NV.rm.setLatLng(p);
+ if(!navDest())return;
+ if(NV.follow)NV.map.setView(p,Math.max(NV.map.getZoom(),16),{animate:true});
+ const moved=!NV.lastPos||hav(pos.lat,pos.lng,NV.lastPos[0],NV.lastPos[1])>0.03;
+ if(force||(!NV.busy&&Date.now()-NV.last>15000&&moved))navRoute();
+ navNext()}
+function navNext(){if(!NV.open)return;const d=navDest();if(!d||!pos)return;const left=hav(pos.lat,pos.lng,d[0],d[1]);
+ while(NV.steps.length>2&&hav(pos.lat,pos.lng,NV.steps[1].m.location[1],NV.steps[1].m.location[0])<0.025)NV.steps.shift();
+ let a='🧭',x='มุ่งหน้าไปหาลูกค้า',dd=fd(left);
+ if(left<0.03){a='🏠';x='ถึงที่หมายแล้ว กด "ส่งถึงแล้ว" ได้เลย';dd=''}
+ else if(NV.steps.length>1){const s=NV.steps[1],t=navText(s);a=t.a;x=t.x;dd='อีก '+fd(hav(pos.lat,pos.lng,s.m.location[1],s.m.location[0]))}
+ $('#nvA').textContent=a;$('#nvT').textContent=x;$('#nvD').textContent=dd+(NV.fail?' · ⚠️ หาเส้นทางถนนไม่ได้ ใช้เส้นตรงแทน':'');
+ $('#nvE').textContent=(NV.dur?Math.max(1,Math.round(NV.dur/60))+' นาที · ':'')+fd(NV.dist||left)}
+function navUi(){const o=navOrder(),d=navDest();if(!o||!d)return;
+ $('#nvO').textContent='#'+o.no+' · '+o.name;$('#nvTel').href='tel:'+o.tel;$('#nvG').href='https://www.google.com/maps/dir/?api=1&destination='+d.join(',')+'&travelmode=driving';
+ $('#nvF').classList.toggle('on',NV.follow);$('#nvS').textContent=sharing?'📡 แชร์ให้ลูกค้าอยู่ (แตะหยุด)':'▶ แชร์ตำแหน่งให้ลูกค้า';$('#nvS').classList.toggle('on',sharing);
+ const l=orders.filter(x=>coords(x));$('#nvC').innerHTML=l.length>1?l.map(x=>`<button class="${String(x.no)==String(NV.no)?'on':''}" onclick="navPick('${esc(x.no)}')">#${esc(x.no)} ${esc(x.name)}</button>`).join(''):''}
+function navPick(no){NV.no=no;NV.steps=[];NV.dur=0;NV.dist=0;NV.last=0;NV.lastPos=null;NV.follow=true;[NV.cas,NV.line].forEach(l=>{if(l&&NV.map)NV.map.removeLayer(l)});NV.cas=NV.line=null;navMarkers();navUi();if(pos)navOnPos(true);else if(navDest()&&NV.map)NV.map.setView(navDest(),15)}
+function navFit(){if(!NV.map)return;NV.follow=false;const p=[],d=navDest();if(pos)p.push([pos.lat,pos.lng]);if(d)p.push(d);if(!p.length)return;
+ const b=L.latLngBounds(p);if(NV.line)b.extend(NV.line.getBounds());NV.map.fitBounds(b,{paddingTopLeft:[30,130],paddingBottomRight:[30,250],maxZoom:17});navUi()}
+function navFollow(){if(!NV.map)return;NV.follow=true;if(pos)NV.map.setView([pos.lat,pos.lng],Math.max(NV.map.getZoom(),16));navUi()}
+function closeNav(){NV.open=false;$('#nav').hidden=true;document.body.style.overflow='';
+ if(!sharing){if(watchId!=null&&navigator.geolocation){navigator.geolocation.clearWatch(watchId);watchId=null}try{wake&&wake.release()}catch(e){}wake=null}}
+function navDone(){if(!NV.no||!confirm('ยืนยัน: ส่งถึงลูกค้าแล้ว?'))return;finish(NV.no)}
+function navCheck(){if(!NV.open||navOrder())return;const nx=orders.find(o=>coords(o));if(nx)navPick(nx.no);else closeNav()}
+function navGpsErr(){if(NV.open&&!pos)$('#nvT').textContent=err||'หาตำแหน่งไม่ได้'}
+{const _r=render;render=function(){_r.apply(this,arguments);navCheck()}}
+setInterval(()=>{if(NV.open)navUi()},3000);
+document.addEventListener('visibilitychange',()=>{if(!document.hidden&&NV.open){if(!sharing)watch();if(NV.map)NV.map.invalidateSize()}});
+$('#go').onclick=login;$('#key').addEventListener('keydown',e=>{if(e.key=='Enter')login()});
+if(KEY){$('#login').hidden=true;$('#app').hidden=false;login()}
+</script>
+</body>
+</html>

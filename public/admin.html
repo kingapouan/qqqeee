@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta name="robots" content="noindex,nofollow">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="light only">
+<title>OUAN แอดมิน</title>
+<link href="https://fonts.googleapis.com/css2?family=Mali:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--blue:#5271ff;--sun:#ffd562;--bg:#fffdf6;--card:#fff;--line:#f0e9d2;--soft:#eef1ff;--text:#2b2f45;--ink:#666;color-scheme:light;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font-family:'Mali','Noto Sans Thai',system-ui,sans-serif}
+.wrap{max-width:900px;margin:0 auto;padding:14px}
+h1{font-size:20px;color:var(--blue);margin:4px 0 10px}
+.tabs,.chips{display:flex;gap:8px;overflow-x:auto;margin-bottom:12px;scrollbar-width:none}
+button{font:inherit;cursor:pointer}
+.tabs button,.chips button{flex:none;border:2.5px solid var(--line);background:var(--card);padding:8px 16px;border-radius:99px;color:var(--text)}
+.tabs button.on,.chips button.on{background:var(--blue);border-color:var(--blue);color:#fff;font-weight:700}
+.card{background:var(--card);border:2.5px solid var(--blue);border-radius:22px 22px 22px 8px;box-shadow:3px 4px 0 var(--sun);padding:14px;margin-bottom:14px}
+.row{display:flex;justify-content:space-between;gap:8px;align-items:center;flex-wrap:wrap}
+.new{background:var(--sun);color:#3a3000;border-radius:99px;padding:3px 10px;font-weight:700;font-size:13px}
+.items{margin:8px 0;padding:8px 10px;background:var(--soft);border-radius:14px;font-size:14px;line-height:1.7}
+small,.muted{color:var(--ink)}a{color:var(--blue);font-weight:600}
+.st{display:flex;gap:6px;flex-wrap:wrap;margin-top:10px}
+.st button{border:2px solid var(--blue);background:#fff;color:var(--blue);border-radius:14px;padding:8px 12px;font-size:14px}
+.st button.cur{background:var(--blue);color:#fff;font-weight:700}.st button.x{border-color:#c0392b;color:#c0392b}.st button.x.cur{background:#c0392b;color:#fff}
+input,select{font:inherit;padding:8px;border-radius:12px;border:2px solid var(--line);background:#fff;color:var(--text);max-width:100%}
+table{width:100%;border-collapse:collapse;font-size:14px}td,th{padding:6px 4px;text-align:left;border-bottom:1px dashed var(--line)}td input[type=number]{width:76px}.tag{color:#fff;border-radius:99px;padding:3px 10px;font-size:13px;font-weight:700}.big{width:100%;margin-top:10px;border:0;border-radius:16px;background:var(--blue);color:#fff;font-size:18px;font-weight:700;padding:14px;box-shadow:0 4px 0 #3550d6}.big:active{transform:translateY(2px);box-shadow:none}details{margin-top:8px}.slipbox{margin-top:8px}.slipbox summary{color:var(--blue);font-weight:700;font-size:14px}.slipimg img{max-width:100%;max-height:380px;border-radius:12px;border:2px solid var(--line);margin-top:6px;display:block;cursor:zoom-in}#zoom{position:fixed;inset:0;background:rgba(0,0,0,.88);z-index:99;display:flex;align-items:center;justify-content:center;padding:10px;cursor:zoom-out}#zoom img{max-width:100%;max-height:100%;border-radius:8px}summary{color:var(--ink);font-size:13px;cursor:pointer}.info{margin-top:6px;line-height:1.7}.srow{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;padding:10px 0;border-bottom:1px dashed var(--line)}.srow.off{opacity:.5}.sctl{display:flex;gap:6px;align-items:center;flex-wrap:wrap}.sctl button{border:2px solid var(--blue);background:#fff;color:var(--blue);border-radius:12px;padding:6px 10px}.sctl button.x{border-color:#c0392b;color:#c0392b}.sctl button.del{border:0;color:#c0392b}.sn{width:72px;text-align:center}.sn.lowin{border-color:#c0392b;background:#fff0f0}.badge{background:var(--soft);padding:4px 10px;border-radius:99px;font-size:13px}
+.save{background:var(--blue);color:#fff;border:0;border-radius:12px;padding:8px 12px}.del{background:none;border:0;color:#c0392b}
+#login{max-width:340px;margin:18vh auto;text-align:center}#login input{width:100%;margin:10px 0}
+#toast{position:fixed;left:50%;bottom:20px;transform:translateX(-50%);background:var(--text);color:#fff;padding:10px 18px;border-radius:99px;display:none}
+
+.ch{font-size:16px;margin:14px 2px 6px;color:var(--ink)}
+.mlist{padding:4px 14px}
+.mi{padding:12px 0 12px 10px;border-bottom:1px dashed var(--line);border-left:5px solid #2ecc71;margin-left:-4px}.mi:last-child{border-bottom:0}.mi.soon{border-left-color:var(--sun)}.mi.hide{border-left-color:#ccc;opacity:.55}
+.mi-top{display:flex;align-items:center;gap:8px;flex-wrap:wrap}.mi-e{font-size:24px}.mi-n{flex:1;min-width:130px;font-size:16px}
+.seg{display:flex;border:2px solid var(--line);border-radius:12px;overflow:hidden}.seg button{border:0;background:#fff;padding:7px 11px;font-size:13px;color:var(--ink)}.seg button.on{color:#fff;font-weight:700}.seg button.on.sell{background:#2ecc71}.seg button.on.soon{background:var(--sun);color:#3a3000}.seg button.on.hide{background:#999}
+.mi-bot{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-top:10px;font-size:14px}.fld{display:flex;align-items:center;gap:6px;flex-wrap:wrap}.fld input[type=number]{width:76px;text-align:center}.fld button{border:2px solid var(--blue);background:#fff;color:var(--blue);border-radius:10px;padding:5px 10px}.fld button.warn{border-color:#c0392b;color:#c0392b}.fld button.ghost{border-color:var(--line);color:var(--ink)}.mi-del{margin-left:auto;font-size:13px;opacity:.7}
+.addg{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}.addg input,.addg select{width:100%}
+.saving{color:#f5a623;font-weight:700}
+#toast{z-index:50;max-width:90vw;text-align:center}</style>
+</head>
+<body>
+<div class="wrap">
+<div id="login"><h1>🧁 OUAN แอดมิน</h1><input id="key" type="password" placeholder="รหัสแอดมิน" autocomplete="current-password"><button class="save" id="go" style="width:100%;padding:12px">เข้าสู่ระบบ</button><p class="muted" id="msg"></p></div>
+<div id="app" hidden>
+<div class="row"><h1>🧁 OUAN แอดมิน</h1><small id="upd"></small><button class="del" onclick="logout()">ออกจากระบบ</button></div><div id="shopbar" class="card" style="padding:10px 14px"></div>
+<div class="tabs"><button class="on" data-t="o">ออเดอร์</button><button data-t="m">เมนูและสต็อก</button><button data-t="s">สรุปวันนี้</button><button data-t="p">🏷️ โค้ดส่วนลด</button></div>
+<section id="so"><div id="help"></div><div class="chips" id="chips"></div><div id="orders"></div></section>
+<section id="sm" hidden><div id="menu"></div></section>
+<section id="ss" hidden><div id="sum"></div></section>
+<section id="sp" hidden>
+ <div class="card"><b id="pfT">➕ เพิ่มโค้ดใหม่</b>
+  <div class="addg">
+   <input id="pcode" placeholder="โค้ด เช่น OUAN10" maxlength="20" autocapitalize="characters" style="text-transform:uppercase"><button type="button" class="save" onclick="genCode()">🎲 สุ่มโค้ด</button>
+   <select id="ptype"><option value="บาท">ลดเป็นบาท</option><option value="%">ลดเป็น %</option><option value="ส่งฟรี">ส่งฟรี (ฟรีค่าส่ง)</option></select>
+   <input id="pval" type="number" min="0" placeholder="ค่าที่ลด (บาท หรือ %)">
+   <input id="pmin" type="number" min="0" placeholder="ยอดสั่งขั้นต่ำ (ไม่ใส่ = ไม่มี)">
+   <input id="pmax" type="number" min="0" placeholder="ลดสูงสุดกี่บาท (เฉพาะแบบ %)">
+   <input id="pexp" type="date" title="วันหมดอายุ (ใช้ได้ถึงสิ้นวันนั้น)">
+   <input id="plim" type="number" min="0" placeholder="จำกัดครั้งรวม (ไม่ใส่ = ไม่จำกัด)">
+   <input id="pper" type="number" min="0" placeholder="ครั้งต่อเบอร์ (ไม่ใส่ = 1, 0 = ไม่จำกัด)">
+  </div>
+  <label style="display:block;margin-top:8px"><input type="checkbox" id="pon" checked> เปิดใช้งาน</label>
+  <small class="muted">ช่องวันที่ = ใช้ได้ถึงสิ้นวันนั้น · ถ้าแก้โค้ดเดิม ให้พิมพ์โค้ดเดิมแล้วบันทึกทับ (จำนวนที่ใช้แล้วจะไม่หาย)</small>
+  <button class="big" onclick="savePromo()">บันทึกโค้ด</button>
+ </div>
+ <div id="plist"></div>
+</section>
+</div>
+</div>
+<div id="toast"></div>
+<script>
+const ENDPOINT='https://script.google.com/macros/s/AKfycbyo0n2Ouuxr7sYgd0JRvicz23kgxOUJj4mtdD6RDTiWKG82FPZPBAnaCZ7iQaSxcGgD/exec'; // วาง URL Web app ของ Apps Script (เหมือนในหน้าลูกค้า)
+const ST=['รอร้านรับออเดอร์','กำลังทำ','กำลังจัดส่ง','เสร็จสิ้น','ยกเลิก'];
+const $=s=>document.querySelector(s),fmt=n=>'฿'+Number(n).toLocaleString('th-TH');
+const PEND={};let KEY=localStorage.getItem('ouan-key')||'',orders=[],menu=[],filt='งานที่ต้องทำ',seen=null;
+const esc=t=>String(t??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+function toast(t){const e=$('#toast');e.textContent=t;e.style.display='block';clearTimeout(window._t);window._t=setTimeout(()=>e.style.display='none',2600)}
+async function api(action,data={}){const r=await fetch(ENDPOINT,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify({action,key:KEY,...data})});const j=await r.json();if(!j.ok)throw new Error(j.error||'ผิดพลาด');return j}
+let AC=null;addEventListener('pointerdown',()=>{try{AC=AC||new AudioContext();AC.resume()}catch(e){}});
+function beep(){try{if(!AC)return;[0,.4,.8].forEach(t=>{const o=AC.createOscillator();o.connect(AC.destination);o.frequency.value=880;o.start(AC.currentTime+t);o.stop(AC.currentTime+t+.25)})}catch(e){}if(navigator.vibrate)navigator.vibrate([300,100,300])}
+function logout(){localStorage.removeItem('ouan-key');localStorage.removeItem('ouan-oc');location.reload()}
+let SHOPST={open:true,msg:''};
+async function loadShop(){try{SHOPST=await api('shop');renderShop()}catch(e){}}
+function renderShop(){$('#shopbar').innerHTML=`<div class="row"><b>${SHOPST.open?'🟢 ร้านเปิดรับออเดอร์':'🔴 ร้านปิดรับออเดอร์'}${SHOPST.msg&&!SHOPST.open?' · <small>'+esc(SHOPST.msg)+'</small>':''}</b><button class="save" style="${SHOPST.open?'background:#c0392b':''}" onclick="toggleShop()">${SHOPST.open?'ปิดรับออเดอร์':'เปิดรับออเดอร์'}</button></div>`}
+async function toggleShop(){let msg='';const open=!SHOPST.open;if(!open){msg=prompt('ข้อความแจ้งลูกค้า (เว้นว่างได้) เช่น ของหมดแล้ว เปิดอีกครั้งพรุ่งนี้ 10 โมง','')??null;if(msg===null)return}try{SHOPST=await api('setShop',{open,msg});renderShop();toast(open?'เปิดรับออเดอร์แล้ว':'ปิดรับออเดอร์แล้ว')}catch(e){toast(e.message)}}
+function renderSum(){const t=new Date().toDateString(),d=orders.filter(o=>new Date(o.time).toDateString()==t),ok=d.filter(o=>o.status!='ยกเลิก'),s=l=>l.reduce((a,o)=>a+Number(o.sum),0),by={};ok.forEach(o=>{by[o.pay]=(by[o.pay]||0)+Number(o.sum)});const it={};ok.forEach(o=>String(o.items).split(', ').forEach(x=>{const m=x.match(/^(.*) x(\d+)$/);if(m){const k=m[1].replace(/ \(.*\)$/,'');it[k]=(it[k]||0)+Number(m[2])}}));
+ $('#sum').innerHTML=`<div class="card"><b>วันนี้ ${new Date().toLocaleDateString('th-TH',{dateStyle:'long'})}</b><div class="row" style="margin-top:8px"><span>ออเดอร์ (ไม่รวมยกเลิก)</span><b>${ok.length}</b></div><div class="row"><span>ยอดขายรวม</span><b style="font-size:20px;color:var(--blue)">${fmt(s(ok))}</b></div><div class="row"><span>ยกเลิก</span><span>${d.length-ok.length}</span></div><div class="row"><span>ยังไม่เสร็จ</span><span>${d.filter(act).length}</span></div></div>`+
+ `<div class="card"><b>แยกตามวิธีชำระ</b>${Object.entries(by).map(([k,v])=>`<div class="row"><span>${esc(k)}</span><b>${fmt(v)}</b></div>`).join('')||'<p class="muted">ยังไม่มี</p>'}</div>`+
+ `<div class="card"><b>จำนวนที่ขายได้</b>${Object.entries(it).sort((a,b)=>b[1]-a[1]).map(([k,v])=>`<div class="row"><span>${esc(k)}</span><b>${v}</b></div>`).join('')||'<p class="muted">ยังไม่มี</p>'}</div><small class="muted">คิดจาก 150 ออเดอร์ล่าสุด · ใช้ตรวจกับเงินที่เข้าบัญชีตอนปิดร้าน</small>`}
+const FB_URL='https://ouan-e1955-default-rtdb.asia-southeast1.firebasedatabase.app/'; // ใส่ URL Firebase Realtime Database เช่น https://ouan-xxxx-default-rtdb.asia-southeast1.firebasedatabase.app (เว้นว่าง = ใช้แบบดึงข้อมูลเป็นรอบเหมือนเดิม)
+function fbSub(path,cb,st){ // ฟังข้อมูลแบบเรียลไทม์ผ่าน EventSource (ไม่ต้องใช้ SDK) ต่อใหม่เองเมื่อหลุด
+ if(!FB_URL||!window.EventSource)return null;
+ let es=null,dead=false,data=null,wait=1000,tm=null;
+ const apply=(p,d,merge)=>{const ks=String(p||'/').split('/').filter(Boolean),mg=(a,b)=>merge&&a&&typeof a=='object'&&b&&typeof b=='object'?Object.assign({},a,b):b;
+  if(!ks.length){data=mg(data,d);return}
+  if(!data||typeof data!='object')data={};
+  if(d===null)delete data[ks[0]];else data[ks[0]]=mg(data[ks[0]],d)};
+ const open=()=>{if(dead)return;
+  es=new EventSource(FB_URL.replace(/\/$/,'')+'/'+path+'.json');
+  es.onopen=()=>{wait=1000};
+  ['put','patch'].forEach(ev=>es.addEventListener(ev,e=>{try{const m=JSON.parse(e.data);apply(m.path,m.data,ev=='patch');st&&st(true);cb(data)}catch(x){}}));
+  es.onerror=()=>{st&&st(false);try{es.close()}catch(x){}es=null;if(!dead){tm=setTimeout(open,wait);wait=Math.min(wait*2,30000)}}};
+ open();
+ return{close(){dead=true;clearTimeout(tm);if(es)try{es.close()}catch(x){}es=null;st&&st(false)}}}
+var fbLive=false,lastLoad=0,fbS=null,fbT=null;
+function fbStart(){if(fbS||!FB_URL)return;
+ fbS=fbSub('sig/orders',()=>{clearTimeout(fbT);fbT=setTimeout(()=>loadOrders().catch(()=>{}),250)},v=>{fbLive=v;fbBadge()})}
+function fbBadge(){const u=$('#upd');if(u)u.textContent=u.textContent.replace(' · ⚡เรียลไทม์','')+(fbLive?' · ⚡เรียลไทม์':'')}
+async function login(){if(!ENDPOINT){$('#msg').textContent='ยังไม่ได้ใส่ ENDPOINT ในไฟล์';return}KEY=$('#key').value||KEY;$('#msg').textContent='กำลังเข้าสู่ระบบ...';
+ try{await loadOrders();localStorage.setItem('ouan-key',KEY);$('#login').hidden=true;$('#app').hidden=false;loadShop();fbStart();setInterval(()=>{if(document.hidden)return;if(!(fbLive&&Date.now()-lastLoad<60000))loadOrders().catch(()=>{});if(!$('#sm').hidden&&!(document.activeElement&&document.activeElement.matches('input')))loadMenu().catch(()=>{})},20000);document.addEventListener('visibilitychange',()=>{if(!document.hidden){loadOrders().catch(()=>{});loadShop()}})}catch(e){$('#login').hidden=false;$('#app').hidden=true;$('#msg').textContent=e.message;if(/รหัส/.test(e.message))localStorage.removeItem('ouan-key')}}
+async function loadOrders(){const j=await api('orders');lastLoad=Date.now();orders=j.orders||[];orders.forEach(o=>{if(PEND[o.no])o.status=PEND[o.no]});const n=orders.filter(o=>o.status==ST[0]).length;if(seen!==null&&n>seen)beep();seen=n;$('#upd').textContent='อัปเดต '+new Date().toLocaleTimeString('th-TH')+(fbLive?' · ⚡เรียลไทม์':'');renderOrders();if(!$('#ss').hidden)renderSum()}
+const NEXT={'รอร้านรับออเดอร์':'กำลังทำ','กำลังทำ':'กำลังจัดส่ง','กำลังจัดส่ง':'เสร็จสิ้น'},COL={'รอร้านรับออเดอร์':'#f5a623','กำลังทำ':'#5271ff','กำลังจัดส่ง':'#8e5cf5','เสร็จสิ้น':'#2ecc71','ยกเลิก':'#c0392b'};
+const ago=t=>{const m=Math.round((Date.now()-new Date(t))/60000);return m<1?'เมื่อสักครู่':m<60?m+' นาทีที่แล้ว':Math.round(m/60)+' ชม.ที่แล้ว'};
+const act=o=>o.status!='เสร็จสิ้น'&&o.status!='ยกเลิก';
+function renderOrders(){
+ const tabs=[['งานที่ต้องทำ',orders.filter(act).length],...ST.map(s=>[s,orders.filter(o=>o.status==s).length]),['ทั้งหมด',orders.length]];
+ $('#chips').innerHTML=tabs.map(([s,c])=>`<button class="${s==filt?'on':''}" onclick="filt='${s}';renderOrders()">${s} (${c})</button>`).join('');
+ const l=orders.filter(o=>filt=='ทั้งหมด'||(filt=='งานที่ต้องทำ'?act(o):o.status==filt));
+ $('#orders').innerHTML=l.length?l.map(o=>{const c=COL[o.status]||'#5271ff',n=NEXT[o.status];return `<div class="card" style="border-color:${c}"><div class="row"><b>#${esc(o.no)}</b><span class="tag" style="background:${c}">${esc(o.status)}</span>${PEND[o.no]?'<small class="saving">⏳ กำลังบันทึก...</small>':''}<small>${ago(o.time)}</small></div>
+ <div class="items">${esc(o.items).split(', ').join('<br>')}</div>
+ <div class="row"><b style="font-size:18px">${fmt(o.sum)}</b><span class="muted">${esc(o.way)} · ${esc(o.pay)}</span></div>${o.code?`<div class="muted">🏷️ โค้ด ${esc(o.code)} · ลด ${fmt(o.disc)}</div>`:''}
+ <div class="info">👤 ${esc(o.name)} · <a href="tel:${esc(o.tel)}">${esc(o.tel)}</a><br>📍 ${esc(o.addr)||'-'} ${o.map?`<a href="${esc(String(o.map).split(' ')[0])}" target="_blank" rel="noopener">แผนที่</a>`:''}${o.note?'<br>📝 '+esc(o.note):''}${o.rnote?'<br>🛵 ฝากไรเดอร์: '+esc(o.rnote):''}<br>${o.slip?slipBox(o):'<span class="muted">ไม่มีสลิป</span>'}</div>
+ ${n?`<button class="big" onclick="setSt('${esc(o.no)}','${n}')">${n} ▶</button>`:''}
+ <details><summary>เปลี่ยนสถานะอื่น / ยกเลิก</summary><div class="st">${ST.map(s=>`<button class="${s==o.status?'cur':''} ${s=='ยกเลิก'?'x':''}" onclick="setSt('${esc(o.no)}','${s}')">${s}</button>`).join('')}</div></details></div>`}).join(''):'<p class="muted" style="text-align:center;padding:30px">ไม่มีออเดอร์ในหมวดนี้ 🎉</p>';
+ document.querySelectorAll('details.slipbox[open] .slipimg').forEach(el=>loadSlip(el.dataset.slip));
+ try{localStorage.setItem('ouan-oc',JSON.stringify(orders))}catch(e){}
+}
+/* ===== สลิปแสดงในหน้าเลย (ซ่อน/แสดงได้ กดที่รูปเพื่อขยาย) ===== */
+const SLIP={},SLIPH={},slipQ=[];let slipN=0;
+function slipHtml(no){const s=SLIP[no];if(s&&s.img)return `<img src="${s.img}" alt="สลิป #${esc(no)}" onclick="zoomSlip('${esc(no)}')">`;if(s&&s.err)return `<small class="muted">${esc(s.err)} <a href="javascript:void 0" onclick="loadSlip('${esc(no)}',true)">ลองใหม่</a></small>`;return '<small class="muted">⏳ กำลังโหลดสลิป...</small>'}
+function slipBox(o){const no=String(o.no),hide=no in SLIPH?SLIPH[no]:!act(o);return `<details class="slipbox" ${hide?'':'open'} ontoggle="slipToggle('${esc(no)}',this.open)"><summary>🧾 สลิปโอนเงิน (กดซ่อน/แสดง)</summary><div class="slipimg" data-slip="${esc(no)}">${slipHtml(no)}</div></details>`}
+function slipToggle(no,open){SLIPH[no]=!open;if(open)loadSlip(no)}
+function loadSlip(no,force){const s=SLIP[no];if(!force&&s&&(s.img||s.busy))return;SLIP[no]={busy:true};slipQ.push(no);pumpSlip()}
+function pumpSlip(){while(slipN<2&&slipQ.length){const no=slipQ.shift();slipN++;api('slip',{no}).then(j=>{SLIP[no]={img:j.img}},e=>{SLIP[no]={err:e.message}}).finally(()=>{slipN--;document.querySelectorAll('[data-slip="'+no+'"]').forEach(el=>el.innerHTML=slipHtml(no));pumpSlip()})}}
+function zoomSlip(no){const s=SLIP[no];if(!s||!s.img)return;const z=document.createElement('div');z.id='zoom';z.innerHTML='<img src="'+s.img+'" alt="สลิป">';z.onclick=()=>z.remove();document.body.appendChild(z)}
+async function setSt(no,s){const o=orders.find(x=>x.no==no),old=o.status;if(old==s)return;let restock=false;if(s=='ยกเลิก'){if(!confirm('ยกเลิกออเดอร์ #'+no+'?'))return;restock=confirm('คืนสต็อกสินค้าในออเดอร์นี้ด้วยไหม?\n(ตกลง = คืน, ยกเลิก = ไม่คืน)')}
+ o.status=s;PEND[no]=s;renderOrders();
+ try{await api('setStatus',{no,status:s,restock});if(PEND[no]==s)delete PEND[no];renderOrders();toast('✅ เปลี่ยนเป็น "'+s+'" เรียบร้อยแล้ว (#'+no+')')}
+ catch(e){if(PEND[no]==s)delete PEND[no];o.status=old;renderOrders();toast('❌ ไม่สำเร็จ: '+e.message+' — คืนค่าเดิมแล้ว')}}
+async function loadMenu(){menu=(await api('menu')).menu||[];renderMenu()}
+function renderMenu(){
+ const lim=m=>m.stock===''||m.stock==null,low=menu.filter(m=>m.on&&!lim(m)&&Number(m.stock)<=5);
+ const mode=m=>!m.on?'hide':m.st=='เร็วๆนี้'?'soon':'sell';
+ const item=(m,i)=>{const md=mode(m),st=Number(m.stock);return `<div class="mi ${md}">
+  <div class="mi-top"><span class="mi-e">${esc(m.e)}</span><b class="mi-n">${esc(m.n)}</b>
+   <div class="seg">${[['sell','ขายอยู่'],['soon','✨ เร็วๆ นี้'],['hide','ซ่อน']].map(([k,t])=>`<button class="${md==k?'on '+k:''}" onclick="setMode(${i},'${k}')">${t}</button>`).join('')}</div></div>
+  <div class="mi-bot">
+   <label class="fld">ราคา ฿<input type="number" min="0" value="${m.p}" onchange="setPrice(${i},this.value)"></label>
+   <div class="fld">สต็อก ${lim(m)?`<span class="badge">ไม่จำกัด</span><button onclick="setStock(${i},10)">จำกัดจำนวน</button>`:`<button onclick="adj(${i},-1)">−</button><input class="sn ${st<=5?'lowin':''}" type="number" min="0" value="${st}" onchange="setStock(${i},this.value)"><button onclick="adj(${i},1)">+</button><button onclick="adj(${i},10)">+10</button>${st<=0?'<span class="badge" style="background:#ffe3e3;color:#c0392b">หมดแล้ว</span>':'<button class="warn" onclick="setStock(${i},0)">หมด</button>'}<button class="ghost" onclick="setStock(${i},\'\')">ไม่จำกัด</button>`}</div>
+   <button class="del mi-del" onclick="delM(${m.id})">ลบ</button></div></div>`};
+ const cats=[...new Set(menu.map(m=>m.c))];
+ $('#menu').innerHTML=(low.length?`<div class="card" style="box-shadow:3px 4px 0 #ffb3b3">⚠️ สต็อกใกล้หมด: ${low.map(m=>esc(m.n)+' ('+Number(m.stock)+')').join(', ')}</div>`:'')+
+ cats.map(c=>`<h2 class="ch">${esc(c)}</h2><div class="card mlist">${menu.map((m,i)=>m.c==c?item(m,i):'').join('')}</div>`).join('')+
+ `<details class="card"><summary style="font-size:16px;color:var(--blue);font-weight:700">➕ เพิ่มสินค้าใหม่</summary><div class="addg"><input id="nn" placeholder="ชื่อสินค้า" style="grid-column:1/-1"><select id="nc"><option>เค้ก</option><option>เครื่องดื่ม</option>${cats.filter(c=>c!='เค้ก'&&c!='เครื่องดื่ม').map(c=>`<option>${esc(c)}</option>`).join('')}</select><input id="np" type="number" placeholder="ราคา ฿"><input id="ne" placeholder="อิโมจิ เช่น 🍰"><input id="ni" placeholder="ลิงก์รูป (ถ้ามี)"><label><input type="checkbox" id="nsoon"> ตั้งเป็น "เร็วๆ นี้"</label><button class="big" style="margin:0;font-size:16px;padding:10px" onclick="addM()">เพิ่มสินค้า</button></div></details>`}
+function setMode(i,k){const m=menu[i];m.on=k!='hide';m.st=k=='soon'?'เร็วๆนี้':'';renderMenu();sv(i,k=='sell'?'เปิดให้สั่งได้แล้ว':k=='soon'?'ตั้งเป็น "เร็วๆ นี้" แล้ว':'ซ่อนจากหน้าลูกค้าแล้ว')}
+async function sv(i,msg){try{await api('saveMenu',{item:menu[i]});toast('✅ '+(msg||'บันทึกแล้ว'))}catch(e){toast(e.message);loadMenu()}}
+async function adj(i,d){const m=menu[i];m.stock=Math.max(0,Number(m.stock||0)+d);renderMenu();try{const j=await api('adjStock',{id:m.id,delta:d});if(j.stock!==''&&j.stock!=null){m.stock=j.stock;renderMenu()}}catch(e){toast(e.message);loadMenu()}}
+function setStock(i,v){menu[i].stock=v===''?'':Math.max(0,Number(v)||0);renderMenu();sv(i)}
+function setPrice(i,v){menu[i].p=Number(v)||0;sv(i)}
+function setSoon(i,v){menu[i].st=v;renderMenu();sv(i);toast(v?'ตั้งเป็น "เร็วๆ นี้" แล้ว':'เปิดให้สั่งได้แล้ว')}
+function setOn(i,v){menu[i].on=v;renderMenu();sv(i)}
+async function delM(id){if(!confirm('ลบสินค้านี้ถาวร?'))return;try{await api('deleteMenu',{id});await loadMenu()}catch(e){toast(e.message)}}
+async function addM(){const n=$('#nn').value.trim(),p=Number($('#np').value);if(!n||!p){toast('ใส่ชื่อและราคา');return}const id=Math.max(0,...menu.map(m=>m.id))+1;try{await api('saveMenu',{item:{id,c:$('#nc').value,n,d:'',p,e:$('#ne').value||'🍰',img:$('#ni').value,on:true,stock:'',st:$('#nsoon').checked?'เร็วๆนี้':''}});await loadMenu();toast('เพิ่มแล้ว')}catch(e){toast(e.message)}}
+document.querySelectorAll('.tabs button').forEach(b=>b.onclick=()=>{document.querySelectorAll('.tabs button').forEach(x=>x.classList.toggle('on',x==b));$('#so').hidden=b.dataset.t!='o';$('#sm').hidden=b.dataset.t!='m';$('#ss').hidden=b.dataset.t!='s';$('#sp').hidden=b.dataset.t!='p';if(b.dataset.t=='m')loadMenu().catch(e=>toast(e.message));if(b.dataset.t=='s')renderSum();if(b.dataset.t=='p')loadPromos().catch(e=>toast(e.message))});
+/* ===== โค้ดส่วนลด ===== */
+let promos=[];
+async function loadPromos(){promos=(await api('promos')).promos||[];renderPromos()}
+const pdesc=p=>(p.type=='%'?'ลด '+p.val+'%'+(p.max?' (สูงสุด '+fmt(p.max)+')':''):p.type=='ส่งฟรี'?'ส่งฟรี':'ลด '+fmt(p.val))+(p.min?' · ขั้นต่ำ '+fmt(p.min):'');
+function renderPromos(){
+ $('#plist').innerHTML=promos.length?promos.map((p,i)=>`<div class="card"><div class="row"><b style="font-size:18px">${esc(p.code)}</b><span class="tag" style="background:${p.on?'#2ecc71':'#999'}">${p.on?'เปิดใช้':'ปิด'}</span></div>
+ <div style="margin-top:4px">${esc(pdesc(p))}</div>
+ <small class="muted">ใช้แล้ว ${p.used}${p.limit!==''?' / '+p.limit:''} ครั้ง · ต่อเบอร์ ${p.per===''?1:(p.per==0?'ไม่จำกัด':p.per)} ครั้ง · ${p.exp?'หมดอายุ '+esc(p.exp):'ไม่มีวันหมดอายุ'}</small>
+ <div class="st"><button onclick="navigator.clipboard&&navigator.clipboard.writeText('${esc(p.code)}').then(()=>toast('คัดลอกโค้ดแล้ว'))">คัดลอก</button><button onclick="editPromo(${i})">แก้ไข</button><button onclick="togglePromo(${i})">${p.on?'ปิดใช้งาน':'เปิดใช้งาน'}</button><button class="x" onclick="delPromo(${i})">ลบ</button></div></div>`).join(''):'<p class="muted" style="text-align:center;padding:24px">ยังไม่มีโค้ดส่วนลด เพิ่มด้านบนได้เลย 🏷️</p>'}
+const pv=id=>$('#'+id).value.trim();
+function promoItem(){return{code:pv('pcode').toUpperCase(),type:$('#ptype').value,val:pv('pval'),min:pv('pmin'),max:pv('pmax'),exp:pv('pexp'),limit:pv('plim'),per:pv('pper'),on:$('#pon').checked}}
+function genCode(){const c='ABCDEFGHJKLMNPQRSTUVWXYZ23456789';let t='OUAN';for(let i=0;i<4;i++)t+=c[Math.floor(Math.random()*c.length)];$('#pcode').value=t}
+async function savePromo(){const it=promoItem();if(!/^[A-Z0-9_-]{3,20}$/.test(it.code)){toast('โค้ดใช้ได้เฉพาะ A-Z 0-9 _ - ยาว 3-20 ตัว');return}if(it.type!='ส่งฟรี'&&!(Number(it.val)>0)){toast('ใส่ค่าที่ลดก่อน');return}if(it.type=='%'&&Number(it.val)>100){toast('ลดได้ไม่เกิน 100%');return}try{await api('savePromo',{item:it});toast('✅ บันทึกโค้ดแล้ว');['pcode','pval','pmin','pmax','pexp','plim','pper'].forEach(id=>$('#'+id).value='');$('#pon').checked=true;$('#pfT').textContent='➕ เพิ่มโค้ดใหม่';await loadPromos()}catch(e){toast('❌ '+e.message)}}
+function editPromo(i){const p=promos[i];$('#pcode').value=p.code;$('#ptype').value=p.type;$('#pval').value=p.type=='ส่งฟรี'?'':p.val;$('#pmin').value=p.min||'';$('#pmax').value=p.max||'';$('#pexp').value=p.exp||'';$('#plim').value=p.limit;$('#pper').value=p.per;$('#pon').checked=p.on;$('#pfT').textContent='✏️ แก้ไขโค้ด '+p.code;scrollTo({top:0,behavior:'smooth'})}
+async function togglePromo(i){const p=promos[i];try{await api('savePromo',{item:{...p,on:!p.on}});await loadPromos()}catch(e){toast('❌ '+e.message)}}
+async function delPromo(i){const p=promos[i];if(!confirm('ลบโค้ด '+p.code+' ถาวร?'))return;try{await api('deletePromo',{code:p.code});await loadPromos()}catch(e){toast('❌ '+e.message)}}
+$('#go').onclick=login;$('#key').addEventListener('keydown',e=>{if(e.key=='Enter')login()});
+if(KEY&&ENDPOINT){try{orders=JSON.parse(localStorage.getItem('ouan-oc')||'[]')}catch(e){}$('#login').hidden=true;$('#app').hidden=false;renderOrders();login()}
+if(!localStorage.getItem('ouan-help'))$('#help').innerHTML='<div class="card" style="border-color:#f5a623">👋 <b>วิธีใช้ 3 ขั้นตอน</b><br>1) ออเดอร์ใหม่ขึ้นสีส้ม พร้อมเสียงเตือน<br>2) กด "ดูสลิป" ตรวจยอดให้ตรง<br>3) กดปุ่มสีฟ้าใหญ่เพื่อไปขั้นต่อไปทีละขั้น จนเสร็จสิ้น (ลูกค้าเห็นสถานะทันที)<br><button class="save" style="margin-top:8px" onclick="localStorage.setItem(\'ouan-help\',1);this.parentNode.remove()">เข้าใจแล้ว</button></div>';
+</script>
+</body>
+</html>
